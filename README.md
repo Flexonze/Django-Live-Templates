@@ -4,7 +4,7 @@ A catalog of Django opinionated code snippets to use with the live template func
 Learn more about Live templates here: https://www.jetbrains.com/help/pycharm/using-live-templates.html
 
 ## How to use
-1. Download the `Django snippets.xml` file
+1. Download the [Django snippets.xml](https://raw.githubusercontent.com/Flexonze/Django-Live-Templates/main/Django%20snippets.xml) file. (Right click + Save as...)
 2. Move the file to the `templates` folder of your IDE  
 
 **Windows**  
