@@ -1,0 +1,123 @@
+<templateSet group="Django snippets">
+  <template name="modeladmin" value="from django.contrib import admin&#10;from django.contrib.admin import ModelAdmin&#10;from $APP_NAME$.models import $MODEL_NAME$&#10;&#10;&#10;@admin.register($MODEL_NAME$)&#10;class $MODEL_NAME$Admin(ModelAdmin):&#10;    pass&#10;$END$" description="Create an empty ModelAdmin" toReformat="false" toShortenFQNames="true">
+    <variable name="APP_NAME" expression="groovyScript(&quot;return _1.split('/').take(1);&quot;, fileRelativePath())" defaultValue="" alwaysStopAt="false" />
+    <variable name="MODEL_NAME" expression="capitalize(camelCase(groovyScript(&quot;return _1.replace('_admin.py', '')&quot;, fileName())))" defaultValue="" alwaysStopAt="false" />
+    <context>
+      <option name="Python_Top_Level" value="true" />
+    </context>
+  </template>
+  <template name="manager" value="from django.db.models import Manager&#10;&#10;&#10;class $MODEL_NAME$Manager(Manager):&#10;    def get_queryset(self):&#10;        queryset = super().get_queryset()&#10;        return queryset$END$&#10;" description="Create a Manager class" toReformat="false" toShortenFQNames="true">
+    <variable name="MODEL_NAME" expression="capitalize(camelCase(groovyScript(&quot;return _1.replace('_manager.py', '')&quot;, fileName())))" defaultValue="" alwaysStopAt="false" />
+    <context>
+      <option name="Python_Top_Level" value="true" />
+    </context>
+  </template>
+  <template name="factorytests" value="from django.test import TestCase&#10;from $APP_NAME$.models import $MODEL_NAME$&#10;from $APP_NAME$.tests.factories.$MODEL_NAME_SNAKE_CASE$_factory import $MODEL_NAME$Factory&#10;&#10;&#10;class Test$MODEL_NAME$Factory(TestCase):&#10;    def test_can_create_$MODEL_NAME_SNAKE_CASE$_factory(self):&#10;        initial_$MODEL_NAME_SNAKE_CASE$_count = $MODEL_NAME$.objects.count()&#10;&#10;        factory = $MODEL_NAME$Factory()&#10;        factory.full_clean()&#10;&#10;        $MODEL_NAME_SNAKE_CASE$_count = $MODEL_NAME$.objects.count()&#10;&#10;        self.assertEqual($MODEL_NAME_SNAKE_CASE$_count, initial_$MODEL_NAME_SNAKE_CASE$_count + 1)&#10;$END$" description="Create basic tests for a DjangoModelFactory" toReformat="false" toShortenFQNames="true">
+    <variable name="APP_NAME" expression="groovyScript(&quot;return _1.split('/').take(1);&quot;, fileRelativePath())" defaultValue="" alwaysStopAt="false" />
+    <variable name="MODEL_NAME_SNAKE_CASE" expression="groovyScript(&quot;return _1.split('_')[1..-2].join('_');&quot;, fileName())" defaultValue="" alwaysStopAt="false" />
+    <variable name="MODEL_NAME" expression="capitalize(camelCase(MODEL_NAME_SNAKE_CASE)) " defaultValue="" alwaysStopAt="false" />
+    <context>
+      <option name="Python_Top_Level" value="true" />
+    </context>
+  </template>
+  <template name="admintests" value="from django.contrib import admin&#10;from django.contrib.admin import ModelAdmin&#10;from django.test import TestCase&#10;from django.urls import reverse&#10;from accounts.tests.factories import UserFactory&#10;from $APP_NAME$.models import $MODEL_NAME$&#10;from $APP_NAME$.tests.factories import $MODEL_NAME$Factory&#10;from $APP_NAME$.admin import $MODEL_NAME$Admin&#10;&#10;&#10;class Test$MODEL_NAME$Admin(TestCase):&#10;    @classmethod&#10;    def setUpTestData(cls):&#10;        cls.user = UserFactory(super_user=True)&#10;        cls.$MODEL_NAME_SNAKE_CASE$s = $MODEL_NAME$Factory.create_batch($NUMBER_OF_OBJECTS$)&#10;&#10;    def setUp(self):&#10;        self.client.force_login(self.user)&#10;&#10;    def test_config(self):&#10;        self.assertTrue(issubclass($MODEL_NAME$Admin, ModelAdmin))&#10;        self.assertTrue(admin.site.is_registered($MODEL_NAME$))&#10;&#10;    def test_changelist(self):&#10;        url = reverse(&quot;admin:$APP_NAME$_$MODEL_NAME_LOWER_CASE$_changelist&quot;)&#10;&#10;        with self.assertNumQueries($NUMBER_OF_QUERIES$):&#10;            response = self.client.get(url)&#10;&#10;        self.assertEqual(200, response.status_code)&#10;&#10;    def test_add(self):&#10;        url = reverse(&quot;admin:$APP_NAME$_$MODEL_NAME_LOWER_CASE$_add&quot;)&#10;&#10;        with self.assertNumQueries($NUMBER_OF_QUERIES$):&#10;            response = self.client.get(url)&#10;&#10;        self.assertEqual(200, response.status_code)&#10;&#10;    def test_change(self):&#10;        url = reverse(&quot;admin:$APP_NAME$_$MODEL_NAME_LOWER_CASE$_change&quot;, kwargs={&quot;object_id&quot;: self.$MODEL_NAME_SNAKE_CASE$s[0].id})&#10;&#10;        with self.assertNumQueries($NUMBER_OF_QUERIES$):&#10;            response = self.client.get(url)&#10;&#10;        self.assertEqual(200, response.status_code)&#10;$END$" description="Create basic tests for a ModelAdmin" toReformat="false" toShortenFQNames="true">
+    <variable name="APP_NAME" expression="groovyScript(&quot;return _1.split('/').take(1);&quot;, fileRelativePath())" defaultValue="" alwaysStopAt="false" />
+    <variable name="MODEL_NAME" expression="capitalize(camelCase(MODEL_NAME_SNAKE_CASE)) " defaultValue="" alwaysStopAt="false" />
+    <variable name="MODEL_NAME_SNAKE_CASE" expression="groovyScript(&quot;return _1.split('_')[1..-2].join('_');&quot;, fileName())," defaultValue="" alwaysStopAt="false" />
+    <variable name="NUMBER_OF_OBJECTS" expression="3" defaultValue="3" alwaysStopAt="true" />
+    <variable name="MODEL_NAME_LOWER_CASE" expression="groovyScript(&quot;return _1.replace('_', '')&quot;, MODEL_NAME_SNAKE_CASE)" defaultValue="" alwaysStopAt="false" />
+    <variable name="NUMBER_OF_QUERIES" expression="2" defaultValue="2" alwaysStopAt="true" />
+    <context>
+      <option name="Python_Top_Level" value="true" />
+    </context>
+  </template>
+  <template name="charfield" value="$FIELD$ = models.CharField(&#10;    max_length=$FIELD_LENGHT$, &#10;    null=$FIELD_NULL$, &#10;    blank=$FIELD_BLANK$,&#10;    default=$FIELD_DEFAULT$,&#10;)" description="Create char field" toReformat="true" toShortenFQNames="true">
+    <variable name="FIELD" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="FIELD_LENGHT" expression="" defaultValue="&quot;254&quot;" alwaysStopAt="true" />
+    <variable name="FIELD_NULL" expression="enum(&quot;False&quot;, &quot;True&quot;)" defaultValue="" alwaysStopAt="true" />
+    <variable name="FIELD_BLANK" expression="enum(&quot;False&quot;, &quot;True&quot;)" defaultValue="" alwaysStopAt="true" />
+    <variable name="FIELD_DEFAULT" expression="" defaultValue="&quot;\&quot;\&quot;&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="Python_Class" value="true" />
+    </context>
+  </template>
+  <template name="choice" value="$CHOICE$ = &quot;$CHOICE_VALUE$&quot;, _(&quot;$CHOICE_VERBOSE$&quot;)" description="Create a new choice for a TextChoices" toReformat="true" toShortenFQNames="true">
+    <variable name="CHOICE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="CHOICE_VALUE" expression="snakeCase(CHOICE)" defaultValue="" alwaysStopAt="true" />
+    <variable name="CHOICE_VERBOSE" expression="spaceSeparated(lowercaseAndDash(CHOICE))" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="Python" value="true" />
+    </context>
+  </template>
+  <template name="choicefield" value="$FIELD$ = models.CharField(&#10;    max_length=$FIELD_LENGHT$, &#10;    null=$FIELD_NULL$, &#10;    blank=$FIELD_BLANK$,&#10;    choices=$FIELD_CHOICES$.choices,&#10;    default=$FIELD_CHOICES$.$FIELD_DEFAULT$,&#10;)" description="Create char field with choices" toReformat="true" toShortenFQNames="true">
+    <variable name="FIELD" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="FIELD_LENGHT" expression="" defaultValue="&quot;25&quot;" alwaysStopAt="true" />
+    <variable name="FIELD_NULL" expression="enum(&quot;False&quot;, &quot;True&quot;)" defaultValue="" alwaysStopAt="true" />
+    <variable name="FIELD_BLANK" expression="enum(&quot;False&quot;, &quot;True&quot;)" defaultValue="" alwaysStopAt="true" />
+    <variable name="FIELD_CHOICES" expression="capitalize(camelCase(FIELD))" defaultValue="" alwaysStopAt="true" />
+    <variable name="FIELD_DEFAULT" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="Python_Class" value="true" />
+    </context>
+  </template>
+  <template name="choices" value="class $CLASS$(models.TextChoices):&#10;    $CHOICE$ = &quot;$CHOICE_VALUE$&quot;, _(&quot;$CHOICE_VERBOSE$&quot;)$END$&#10;" description="Create a new TextChoices class" toReformat="true" toShortenFQNames="true">
+    <variable name="CLASS" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="CHOICE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="CHOICE_VALUE" expression="snakeCase(CHOICE)" defaultValue="" alwaysStopAt="true" />
+    <variable name="CHOICE_VERBOSE" expression="spaceSeparated(lowercaseAndDash(CHOICE))" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="Python" value="true" />
+    </context>
+  </template>
+  <template name="datefield" value="$FIELD$ = models.DateField(&#10;    null=$FIELD_NULL$, &#10;    blank=$FIELD_BLANK$,&#10;    default=$FIELD_DEFAULT$,&#10;)" description="Create date field" toReformat="true" toShortenFQNames="true">
+    <variable name="FIELD" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="FIELD_NULL" expression="enum(&quot;False&quot;, &quot;True&quot;)" defaultValue="" alwaysStopAt="true" />
+    <variable name="FIELD_BLANK" expression="enum(&quot;False&quot;, &quot;True&quot;)" defaultValue="" alwaysStopAt="true" />
+    <variable name="FIELD_DEFAULT" expression="" defaultValue="&quot;\&quot;\&quot;&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="Python_Class" value="true" />
+    </context>
+  </template>
+  <template name="foreignkey" value="$FOREIGN_KEY$ = models.ForeignKey(&#10;    $FOREIGN_KEY_MODEL$, &#10;    on_delete=models.$FOREIGN_KEY_ON_DELETE$,&#10;    null=$FOREIGN_KEY_NULL$, &#10;    blank=$FOREIGN_KEY_BLANK$,&#10;)" description="Create foreign key field" toReformat="true" toShortenFQNames="true">
+    <variable name="FOREIGN_KEY" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="FOREIGN_KEY_MODEL" expression="capitalize(camelCase(FOREIGN_KEY))" defaultValue="" alwaysStopAt="true" />
+    <variable name="FOREIGN_KEY_ON_DELETE" expression="enum(&quot;CASCADE&quot;, &quot;PROTECT&quot;, &quot;RESTRICT&quot;, &quot;SET&quot;, &quot;SET_NULL&quot;, &quot;SET_DEFAULT&quot;, &quot;DO_NOTHING&quot;)" defaultValue="&quot;CASCADE&quot;" alwaysStopAt="true" />
+    <variable name="FOREIGN_KEY_NULL" expression="enum(&quot;False&quot;, &quot;True&quot;)" defaultValue="" alwaysStopAt="true" />
+    <variable name="FOREIGN_KEY_BLANK" expression="enum(&quot;False&quot;, &quot;True&quot;)" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="Python_Class" value="true" />
+    </context>
+  </template>
+  <template name="gettext" value="from django.utils.translation import ugettext as _&#10;" description="import ugettext as _" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="Python_Top_Level" value="true" />
+    </context>
+  </template>
+  <template name="gettextlazy" value="from django.utils.translation import ugettext_lazy as _&#10;" description="import ugettext_lazy as _" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="Python_Top_Level" value="true" />
+    </context>
+  </template>
+  <template name="model" value="from django.db import models&#10;from django_extensions.db.models import TimeStampedModel&#10;&#10;from core.models import UUIDModel&#10;&#10;&#10;class $MODEL_NAME$(UUIDModel, TimeStampedModel):&#10;    $END$&#10;" description="Create basic django model" toReformat="true" toShortenFQNames="true">
+    <variable name="MODEL_NAME" expression="capitalize(camelCase(fileNameWithoutExtension()))" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="Python_Top_Level" value="true" />
+    </context>
+  </template>
+  <template name="textfield" value="$FIELD$ = models.CharField(&#10;    null=$FIELD_NULL$, &#10;    blank=$FIELD_BLANK$,&#10;    default=$FIELD_DEFAULT$,&#10;)&#10;   " description="Create text field" toReformat="true" toShortenFQNames="true">
+    <variable name="FIELD" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="FIELD_NULL" expression="enum(&quot;False&quot;, &quot;True&quot;)" defaultValue="" alwaysStopAt="true" />
+    <variable name="FIELD_BLANK" expression="enum(&quot;False&quot;, &quot;True&quot;)" defaultValue="" alwaysStopAt="true" />
+    <variable name="FIELD_DEFAULT" expression="" defaultValue="&quot;\&quot;\&quot;&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="Python_Class" value="true" />
+    </context>
+  </template>
+  <template name="tostr" value="def __str__(self):&#10;    return f&quot;{self.$FIRST_MODEL$} - {self.$SECOND_MODEL$}&quot;" description="Create a simple  __str__ method" toReformat="false" toShortenFQNames="true">
+    <variable name="FIRST_MODEL" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="SECOND_MODEL" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="Python" value="true" />
+    </context>
+  </template>
+</templateSet>
