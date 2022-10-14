@@ -64,10 +64,8 @@ $END$
 | MODEL_NAME_LOWER_CASE | groovyScript("return _1.replace('_', '')", MODEL_NAME_SNAKE_CASE) |               | - [X] |
 | NUMBER_OF_QUERIES | 2 | 2 | - [ ] |
 
-
 ### Applicable contexts
 - Python: top-level.
-
 
 ### Example result
 ```python
