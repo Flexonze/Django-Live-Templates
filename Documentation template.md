@@ -11,13 +11,11 @@ Template description
 ### Template variables
 | Name          | Expression | Default value | Skip if defined |
 |---------------|------------|---------------|-----------------|
-| VARIABLE_NAME |            |               | - [x]           |
-| ...           |            |               | - [ ]           |
-
+| VARIABLE_NAME |  |  | - [x] |
+|  |  |  | - [ ] |
 
 ### Applicable contexts
 - Python: top-level.
-
 
 ### Example result
 ```python
