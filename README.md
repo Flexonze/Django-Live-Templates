@@ -17,5 +17,5 @@ Learn more about Live templates here: https://www.jetbrains.com/help/pycharm/usi
 3. Restart your IDE
 
 ## Additional notes
-- See the [Live templates documentation](url to github folder) for more information on how to use the templates.
+- See the [Live templates documentation](https://github.com/Flexonze/Django-Live-Templates/tree/main/Live%20templates%20documentation) for more information on the different templates.
 - The templates are opinionated and are aimed to work with a specific project structure. Feel free to fork this repo and adapt the templates to your needs.
