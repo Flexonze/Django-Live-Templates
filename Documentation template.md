@@ -16,7 +16,7 @@ Template description
 
 
 ### Applicable contexts
-- Python: Top level
+- Python: top-level.
 
 
 ### Example result
