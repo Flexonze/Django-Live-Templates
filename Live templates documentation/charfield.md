@@ -1,4 +1,4 @@
-# Template Name
+# charfield
 
 ### Description
 Create a CharField
@@ -22,10 +22,8 @@ $FIELD$ = models.CharField(
 | FIELD_BLANK | enum("False", "True") | | - [ ] |
 | FIELD_DEFAULT | | "\"\"" | - [ ] |
 
-
 ### Applicable contexts
 - Python: class.
-
 
 ### Example result
 ```python
