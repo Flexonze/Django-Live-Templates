@@ -1,7 +1,7 @@
-# Template Name
+# choice
 
 ### Description
-Template description
+Create a new choice for a TextChoices
 
 ### Template text
 ```python
@@ -17,7 +17,6 @@ $CHOICE$ = "$CHOICE_VALUE$", _("$CHOICE_VERBOSE$")
 
 ### Applicable contexts
 - Python: class, top-level.
-
 
 ### Example result
 ```python
