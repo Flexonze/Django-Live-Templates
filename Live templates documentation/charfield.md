@@ -24,7 +24,7 @@ $FIELD$ = models.CharField(
 
 
 ### Applicable contexts
-- Python: class
+- Python: class.
 
 
 ### Example result
