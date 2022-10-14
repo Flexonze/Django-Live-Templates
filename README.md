@@ -1,4 +1,4 @@
-# Django-Live-Templates
+# Django Live Templates
 A catalog of Django opinionated code snippets to use with the live template functionality of Jetbrain IDEs.
 
 Learn more about Live templates here: https://www.jetbrains.com/help/pycharm/using-live-templates.html
