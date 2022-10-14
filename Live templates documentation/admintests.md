@@ -66,7 +66,7 @@ $END$
 
 
 ### Applicable contexts
-- Python: Top level
+- Python: top-level.
 
 
 ### Example result
