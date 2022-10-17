@@ -1,7 +1,7 @@
 # Django Live Templates
-A catalog of Django opinionated code snippets to use with the live template functionality of Jetbrain IDEs.
+A catalog of opinionated Django code snippets to use with the live template functionality of Jetbrain IDEs.
 
-Learn more about Live templates here: https://www.jetbrains.com/help/pycharm/using-live-templates.html
+Learn more about live templates here: https://www.jetbrains.com/help/pycharm/using-live-templates.html
 
 ## How to use
 1. Download the [Django snippets.xml](https://raw.githubusercontent.com/Flexonze/Django-Live-Templates/main/Django%20snippets.xml) file. (Right click + Save as...)
