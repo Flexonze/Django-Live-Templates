@@ -111,4 +111,14 @@
       <option name="Python_Class" value="true" />
     </context>
   </template>
+  <template name="get_related_model_count" value="def get_$RELATED_MODEL_SNAKE_CASE$_count(self, obj):&#10;    count = obj.$RELATED_MODEL_SNAKE_CASE$s.count()&#10;&#10;    if count == 0:&#10;        return &quot;-&quot;&#10;&#10;    base_url = reverse(&quot;admin:$APP_NAME$_$RELATED_MODEL_LOWER$_changelist&quot;)&#10;    url = base_url + f&quot;?$MODEL_NAME_LOWER$__id__exact={obj.id}&quot;&#10;    return mark_safe('&lt;a href=&quot;{}&quot;&gt;{}&lt;/a&gt;'.format(url, f&quot;{count} (see)&quot;))&#10;        &#10;get_$RELATED_MODEL_SNAKE_CASE$_count.short_description = &quot;$RELATED_MODEL_STR$s&quot;&#10;$END$" description="method that returns the count as a link that automatically filters related model in your ModelAdmin" toReformat="false" toShortenFQNames="true">
+    <variable name="APP_NAME" expression="groovyScript(&quot;return _1.split('/').take(1);&quot;, fileRelativePath())" defaultValue="" alwaysStopAt="false" />
+    <variable name="RELATED_MODEL_SNAKE_CASE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="RELATED_MODEL_LOWER" expression="groovyScript(&quot;return _1.replace('_', '')&quot;, RELATED_MODEL_SNAKE_CASE)" defaultValue="" alwaysStopAt="false" />
+    <variable name="MODEL_NAME_LOWER" expression="groovyScript(&quot;return _1.replace('_admin.py', '').replace('_', '')&quot;, fileName())" defaultValue="" alwaysStopAt="false" />
+    <variable name="RELATED_MODEL_STR" expression="capitalize(underscoresToSpaces(RELATED_MODEL_SNAKE_CASE))" defaultValue="" alwaysStopAt="false" />
+    <context>
+      <option name="Python_Class" value="true" />
+    </context>
+  </template>
 </templateSet>
