@@ -1,11 +1,11 @@
-# get_related_model_count
+# get_related_model_count_link
 
 ### Description
 method that returns the count as a link that automatically filters related model in your ModelAdmin
 
 ### Template text
 ```python
-def get_$RELATED_MODEL_SNAKE_CASE$_count(self, obj):
+def get_$RELATED_MODEL_SNAKE_CASE$_count_link(self, obj):
     count = obj.$RELATED_MODEL_SNAKE_CASE$s.count()
 
     if count == 0:
@@ -13,7 +13,7 @@ def get_$RELATED_MODEL_SNAKE_CASE$_count(self, obj):
 
     base_url = reverse("admin:$APP_NAME$_$RELATED_MODEL_LOWER$_changelist")
     url = base_url + f"?$MODEL_NAME_LOWER$__id__exact={obj.id}"
-    return mark_safe('<a href="{}">{}</a>'.format(url, f"{count} (see)"))
+    return mark_safe(f"<a href='{url}'>{count} (see)</a>")
         
 get_$RELATED_MODEL_SNAKE_CASE$_count.short_description = "$RELATED_MODEL_STR$s"
 $END$
@@ -33,7 +33,7 @@ $END$
 
 ### Example result
 ```python
-def get_project_count(self, obj):
+def get_project_count_link(self, obj):
     count = obj.projects.count()
 
     if count == 0:
@@ -41,9 +41,9 @@ def get_project_count(self, obj):
 
     base_url = reverse("admin:myapp_project_changelist")
     url = base_url + f"?team__id__exact={obj.id}"
-    return mark_safe('<a href="{}">{}</a>'.format(url, f"{count} (see)"))
+    return mark_safe(f"<a href='{url}'>{count} (see)</a>")
 
-get_project_count.short_description = "Projects"
+get_project_count_link.short_description = "Projects"
 ```
 
 ### Additional notes
