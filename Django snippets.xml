@@ -111,7 +111,7 @@
       <option name="Python_Class" value="true" />
     </context>
   </template>
-  <template name="get_related_model_count" value="def get_$RELATED_MODEL_SNAKE_CASE$_count(self, obj):&#10;    count = obj.$RELATED_MODEL_SNAKE_CASE$s.count()&#10;&#10;    if count == 0:&#10;        return &quot;-&quot;&#10;&#10;    base_url = reverse(&quot;admin:$APP_NAME$_$RELATED_MODEL_LOWER$_changelist&quot;)&#10;    url = base_url + f&quot;?$MODEL_NAME_LOWER$__id__exact={obj.id}&quot;&#10;    return mark_safe(f&quot;&lt;a href='{url}'&gt;{count} (see)&lt;/a&gt;&quot;)&#10;        &#10;get_$RELATED_MODEL_SNAKE_CASE$_count.short_description = &quot;$RELATED_MODEL_STR$s&quot;&#10;$END$" description="method that returns the count as a link that automatically filters related model in your ModelAdmin" toReformat="false" toShortenFQNames="true">
+  <template name="get_related_model_count_link" value="def get_$RELATED_MODEL_SNAKE_CASE$_count_link(self, obj):&#10;    count = obj.$RELATED_MODEL_SNAKE_CASE$s.count()&#10;&#10;    if count == 0:&#10;        return &quot;-&quot;&#10;&#10;    base_url = reverse(&quot;admin:$APP_NAME$_$RELATED_MODEL_LOWER$_changelist&quot;)&#10;    url = base_url + f&quot;?$MODEL_NAME_LOWER$__id__exact={obj.id}&quot;&#10;    return mark_safe(f&quot;&lt;a href='{url}'&gt;{count} (see)&lt;/a&gt;&quot;)&#10;        &#10;get_$RELATED_MODEL_SNAKE_CASE$_count_link.short_description = &quot;$RELATED_MODEL_STR$s&quot;&#10;$END$" description="method that returns the count as a link that automatically filters related model in your ModelAdmin" toReformat="false" toShortenFQNames="true">
     <variable name="APP_NAME" expression="groovyScript(&quot;return _1.split('/').take(1);&quot;, fileRelativePath())" defaultValue="" alwaysStopAt="false" />
     <variable name="RELATED_MODEL_SNAKE_CASE" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="RELATED_MODEL_LOWER" expression="groovyScript(&quot;return _1.replace('_', '')&quot;, RELATED_MODEL_SNAKE_CASE)" defaultValue="" alwaysStopAt="false" />
@@ -119,6 +119,17 @@
     <variable name="RELATED_MODEL_STR" expression="capitalize(underscoresToSpaces(RELATED_MODEL_SNAKE_CASE))" defaultValue="" alwaysStopAt="false" />
     <context>
       <option name="Python_Class" value="true" />
+    </context>
+  </template>
+  <template name="serializertests" value="from django.test import TestCase&#10;&#10;from $APP_NAME$.serializers.$SERIALIZER_NAME_SNAKE_CASE$ import $SERIALIZER_NAME$&#10;from $APP_NAME$.tests.factories import $MODEL_NAME$Factory&#10;&#10;&#10;class Test$SERIALIZER_NAME$(TestCase):&#10;    @classmethod&#10;    def setUpTestData(cls):&#10;        cls.serializer = $SERIALIZER_NAME$&#10;        cls.$MODEL_NAME_SNAKE_CASE$ = $MODEL_NAME$Factory()&#10;        cls.data = cls.serializer(cls.$MODEL_NAME_SNAKE_CASE$).data&#10;&#10;    def test_contains_expected_fields(self):&#10;        expected_keys = {&#10;            &quot;id&quot;,&#10;            &quot;$EXPECTED_FIELD_1$&quot;,&#10;            $END$&#10;        }&#10;        self.assertSetEqual(set(self.data.keys()), expected_keys)&#10;&#10;    def test_returns_the_expected_values(self):&#10;        self.assertEqual(self.data[&quot;id&quot;], str(self.$MODEL_NAME_SNAKE_CASE$.id))&#10;        self.assertEqual(self.data[&quot;$EXPECTED_FIELD_1$&quot;], self.user.$EXPECTED_FIELD_1$)&#10;" description="Create basic tests for a ModelSerializer" toReformat="false" toShortenFQNames="true">
+    <variable name="APP_NAME" expression="groovyScript(&quot;return _1.split('/').take(1);&quot;, fileRelativePath())" defaultValue="" alwaysStopAt="false" />
+    <variable name="SERIALIZER_NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="SERIALIZER_NAME_SNAKE_CASE" expression="snakeCase(SERIALIZER_NAME)" defaultValue="" alwaysStopAt="false" />
+    <variable name="MODEL_NAME" expression="capitalize(camelCase(groovyScript(&quot;return _1.replace('test_','').replace('_serializer.py','')&quot;, fileName())))" defaultValue="" alwaysStopAt="true" />
+    <variable name="MODEL_NAME_SNAKE_CASE" expression="snakeCase(MODEL_NAME)" defaultValue="" alwaysStopAt="false" />
+    <variable name="EXPECTED_FIELD_1" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="Python_Top_Level" value="true" />
     </context>
   </template>
 </templateSet>
