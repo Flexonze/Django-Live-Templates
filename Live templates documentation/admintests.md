@@ -59,7 +59,7 @@ $END$
 |---------------|------------|---------------|-----------------|
 | APP_NAME | groovyScript("return _1.split('/').take(1);", fileRelativePath())|               | - [x]           |
 | MODEL_NAME | capitalize(camelCase(MODEL_NAME_SNAKE_CASE)) |  | - [X] |
-| MODEL_NAME_SNAKE_CASE | groovyScript("return _1.split('_')[1..-2].join('_');", fileName()), | | - [X] |
+| MODEL_NAME_SNAKE_CASE | groovyScript("return _1.split('_')[1..-2].join('_');", fileName()) | | - [X] |
 | NUMBER_OF_OBJECTS | 3 | 3 | - [ ] |
 | MODEL_NAME_LOWER_CASE | groovyScript("return _1.replace('_', '')", MODEL_NAME_SNAKE_CASE) |               | - [X] |
 | NUMBER_OF_QUERIES | 2 | 2 | - [ ] |
@@ -119,4 +119,4 @@ class TestProjectAdmin(TestCase):
 ```
 
 ### Additional notes
-- Must be in its own file called ` test_model_name_admin.py` (where `model_name` is the name of your model in snake_case)
+- Must be in its own file called `test_model_name_admin.py` (where `model_name` is the name of your model in snake_case)
