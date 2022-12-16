@@ -39,4 +39,4 @@ class ProjectAdmin(ModelAdmin):
 ```
 
 ### Additional notes
-- Must be in its own file called ` model_name_admin.py` (where `model_name` is the name of your model in snake_case)
+- Must be in its own file called `model_name_admin.py` (where `model_name` is the name of your model in snake_case)
