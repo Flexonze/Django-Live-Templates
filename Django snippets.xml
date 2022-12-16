@@ -132,4 +132,14 @@
       <option name="Python_Top_Level" value="true" />
     </context>
   </template>
+  <template name="modeltests" value="from django.test import TestCase&#10;from $APP_NAME$.models import $MODEL_NAME$&#10;&#10;&#10;class Test$MODEL_NAME$(TestCase):&#10;    @classmethod&#10;    def setUpTestData(cls):&#10;        cls.$MODEL_NAME_SNAKE_CASE$ = $MODEL_NAME$(&#10;            $ATTRIBUTES$&#10;        )&#10;&#10;    def test_can_create_a_$MODEL_NAME_SNAKE_CASE$(self):&#10;        self.$MODEL_NAME_SNAKE_CASE$.full_clean()&#10;        self.$MODEL_NAME_SNAKE_CASE$.save()&#10;&#10;    def test_can_print_a_$MODEL_NAME_SNAKE_CASE$(self):&#10;        expected_str = &quot;$EXPECTED_STR$&quot;&#10;        self.assertEqual(str(self.$MODEL_NAME_SNAKE_CASE$), expected_str)&#10;$END$" description="Create basic tests for a Model" toReformat="false" toShortenFQNames="true">
+    <variable name="APP_NAME" expression="groovyScript(&quot;return _1.split('/').take(1);&quot;, fileRelativePath())" defaultValue="" alwaysStopAt="false" />
+    <variable name="MODEL_NAME" expression="capitalize(camelCase(MODEL_NAME_SNAKE_CASE)) " defaultValue="" alwaysStopAt="false" />
+    <variable name="MODEL_NAME_SNAKE_CASE" expression="groovyScript(&quot;return _1.replace('test_', '').replace('.py', '');&quot;, fileName())," defaultValue="" alwaysStopAt="false" />
+    <variable name="ATTRIBUTES" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="EXPECTED_STR" expression="&quot;&quot;" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="Python_Top_Level" value="true" />
+    </context>
+  </template>
 </templateSet>
