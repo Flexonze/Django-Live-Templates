@@ -19,10 +19,10 @@ class $MODEL_NAME$Filter(FilterSet):
 ```
 
 ### Template variables
-| Name          | Expression | Default value | Skip if defined |
-|---------------|------------|---------------|----------------|
-| $APP_NAME$ | groovyScript("return _1.split('/').take(1);", fileRelativePath()) |  | - [x] |
-| $MODEL_NAME$ | capitalize(camelCase(groovyScript("return _1.replace('_filters.py', '')", fileName()))) |  | - [x] |
+| Name       | Expression | Default value | Skip if defined |
+|------------|------------|---------------|----------------|
+| APP_NAME | groovyScript("return _1.split('/').take(1);", fileRelativePath()) |  | - [x] |
+| MODEL_NAME | capitalize(camelCase(groovyScript("return _1.replace('_filters.py', '')", fileName()))) |  | - [x] |
 
 ### Applicable contexts
 - Python: top-level.
