@@ -149,4 +149,11 @@
       <option name="Python_Top_Level" value="true" />
     </context>
   </template>
+  <template name="filterset" value="from django_filters.rest_framework import FilterSet&#10;&#10;from $APP_NAME$.models import $MODEL_NAME$&#10;&#10;&#10;class $MODEL_NAME$Filter(FilterSet):&#10;    class Meta:&#10;        model = $MODEL_NAME$&#10;        fields = [&#10;            &quot;$END$&quot;,&#10;        ]&#10;" description="Create a basic filterset (requires the django-filters package)" toReformat="false" toShortenFQNames="true">
+    <variable name="APP_NAME" expression="groovyScript(&quot;return _1.split('/').take(1);&quot;, fileRelativePath())" defaultValue="" alwaysStopAt="false" />
+    <variable name="MODEL_NAME" expression="capitalize(camelCase(groovyScript(&quot;return _1.replace('_filters.py', '')&quot;, fileName())))" defaultValue="" alwaysStopAt="false" />
+    <context>
+      <option name="Python_Top_Level" value="true" />
+    </context>
+  </template>
 </templateSet>
