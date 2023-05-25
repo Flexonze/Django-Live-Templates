@@ -88,12 +88,12 @@
       <option name="Python_Class" value="true" />
     </context>
   </template>
-  <template name="gettext" value="from django.utils.translation import ugettext as _&#10;" description="import ugettext as _" toReformat="true" toShortenFQNames="true">
+  <template name="gettext" value="from django.utils.translation import gettext as _&#10;" description="import gettext as _" toReformat="true" toShortenFQNames="true">
     <context>
       <option name="Python_Top_Level" value="true" />
     </context>
   </template>
-  <template name="gettextlazy" value="from django.utils.translation import ugettext_lazy as _&#10;" description="import ugettext_lazy as _" toReformat="true" toShortenFQNames="true">
+  <template name="gettextlazy" value="from django.utils.translation import gettext_lazy as _&#10;" description="import gettext_lazy as _" toReformat="true" toShortenFQNames="true">
     <context>
       <option name="Python_Top_Level" value="true" />
     </context>
