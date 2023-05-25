@@ -1,11 +1,11 @@
 # gettextlazy
 
 ### Description
-import ugettext_lazy as _
+import gettext_lazy as _
 
 ### Template text
 ```python
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 ```
 
 ### Template variables
@@ -16,5 +16,5 @@ No variables
 
 ### Example result
 ```python
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 ```
