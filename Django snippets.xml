@@ -98,7 +98,7 @@
       <option name="Python_Top_Level" value="true" />
     </context>
   </template>
-  <template name="model" value="from django.db import models&#10;from django_extensions.db.models import TimeStampedModel&#10;&#10;from core.models import UUIDModel&#10;&#10;&#10;class $MODEL_NAME$(UUIDModel, TimeStampedModel):&#10;    $END$&#10;&#10;    def str(self):&#10;        return self.pk&#10;" description="Create basic Django model" toReformat="true" toShortenFQNames="true">
+  <template name="model" value="from django.db import models&#10;from django_extensions.db.models import TimeStampedModel&#10;&#10;from core.models import UUIDModel&#10;&#10;&#10;class $MODEL_NAME$(UUIDModel, TimeStampedModel):&#10;    $END$&#10;&#10;    def __str__(self):&#10;        return self.pk&#10;" description="Create basic Django model" toReformat="true" toShortenFQNames="true">
     <variable name="MODEL_NAME" expression="capitalize(camelCase(fileNameWithoutExtension()))" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="Python_Top_Level" value="true" />
