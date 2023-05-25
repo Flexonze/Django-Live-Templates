@@ -14,6 +14,9 @@ from core.models import UUIDModel
 class $MODEL_NAME$(UUIDModel, TimeStampedModel):
     $END$
 
+    def str(self):
+        return self.pk
+
 ```
 
 ### Template variables
@@ -34,6 +37,9 @@ from core.models import UUIDModel
 
 class Project(UUIDModel, TimeStampedModel):
     
+    
+    def str(self):
+        return self.pk
 
 ```
 
