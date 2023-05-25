@@ -1,11 +1,11 @@
 # gettext
 
 ### Description
-import ugettext as _
+import gettext as _
 
 ### Template text
 ```python
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 ```
 
 ### Template variables
@@ -16,5 +16,5 @@ No variables
 
 ### Example result
 ```python
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 ```
