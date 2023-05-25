@@ -14,7 +14,7 @@ from core.models import UUIDModel
 class $MODEL_NAME$(UUIDModel, TimeStampedModel):
     $END$
 
-    def str(self):
+    def __str__(self):
         return self.pk
 
 ```
@@ -38,7 +38,7 @@ from core.models import UUIDModel
 class Project(UUIDModel, TimeStampedModel):
     
     
-    def str(self):
+    def __str__(self):
         return self.pk
 
 ```
