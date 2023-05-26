@@ -15,7 +15,7 @@ class $MODEL_NAME$(UUIDModel, TimeStampedModel):
     $END$
 
     def __str__(self):
-        return self.pk
+        return str(self.pk)
 
 ```
 
@@ -39,7 +39,7 @@ class Project(UUIDModel, TimeStampedModel):
     
     
     def __str__(self):
-        return self.pk
+        return str(self.pk)
 
 ```
 
