@@ -156,4 +156,15 @@
       <option name="Python_Top_Level" value="true" />
     </context>
   </template>
+  <template name="simplelistfilter" value="from django.contrib.admin import SimpleListFilter&#10;from django.utils.translation import gettext as _&#10;&#10;&#10;class $FILTER_NAME_CAMEL_CASE$Filter(SimpleListFilter):&#10;    title = _(&quot;$FILTER_NAME$&quot;)&#10;    parameter_name = &quot;$FILTER_NAME_SNAKE_CASE$&quot;&#10;&#10;    def lookups(self, request, model_admin):&#10;        return (&#10;            (&quot;$LOOKUP_VALUE$&quot;, _(&quot;$LOOKUP_VALUE_CAPITALIZED$&quot;)),$END$&#10;        )&#10;&#10;    def queryset(self, request, queryset):&#10;        if self.value() == &quot;$LOOKUP_VALUE$&quot;:&#10;            return queryset.filter($FILTER_NAME_SNAKE_CASE_EDITABLE$=True)&#10;        else:&#10;            return queryset&#10;" description="Create a basic SimpleListFilter" toReformat="false" toShortenFQNames="true">
+    <variable name="FILTER_NAME_CAMEL_CASE" expression="capitalize(camelCase(FILTER_NAME))" defaultValue="" alwaysStopAt="false" />
+    <variable name="FILTER_NAME" expression="groovyScript(&quot;return _1.replace('_filter.py', '')&quot;, fileName())" defaultValue="" alwaysStopAt="false" />
+    <variable name="FILTER_NAME_SNAKE_CASE" expression="snakeCase(FILTER_NAME)" defaultValue="" alwaysStopAt="false" />
+    <variable name="LOOKUP_VALUE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="LOOKUP_VALUE_CAPITALIZED" expression="capitalize(spaceSeparated(LOOKUP_VALUE))" defaultValue="" alwaysStopAt="false" />
+    <variable name="FILTER_NAME_SNAKE_CASE_EDITABLE" expression="FILTER_NAME_SNAKE_CASE" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="Python_Top_Level" value="true" />
+    </context>
+  </template>
 </templateSet>
